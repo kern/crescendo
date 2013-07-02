@@ -1,6 +1,6 @@
 (ns crescendo.protocol-spec
-  (:use speclj.core)
-  (:require [crescendo.protocol :refer [protocol http-1-1 https-1-1]]))
+  (:require [crescendo.protocol :refer [protocol http-1-1 https-1-1]]
+            [speclj.core :refer :all]))
 
 (describe "a protocol"
   (with proto (protocol {:major -1

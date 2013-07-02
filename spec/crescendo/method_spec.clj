@@ -1,6 +1,6 @@
 (ns crescendo.method-spec
-  (:use speclj.core)
-  (:require [crescendo.method :refer [method safe? idempotent?]]))
+  (:require [crescendo.method :refer [method safe? idempotent?]]
+            [speclj.core :refer :all]))
 
 (describe "an HTTP method"
   (it "has a normalized form"

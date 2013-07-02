@@ -1,6 +1,6 @@
 (ns crescendo.status-code-spec
-  (:use speclj.core)
-  (:require [crescendo.status-code :refer [informational? successful? redirection? client-error? server-error? error?]]))
+  (:require [crescendo.status-code :refer [informational? successful? redirection? client-error? server-error? error?]]
+            [speclj.core :refer :all]))
 
 (describe "a status code"
   (it "can be informational"

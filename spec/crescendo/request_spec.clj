@@ -1,7 +1,7 @@
 (ns crescendo.request-spec
-  (:use speclj.core)
   (:require [crescendo.request :refer [request host-uri reconstruct-url]]
-            [crescendo.uri :refer [uri scheme host port path query fragment]]))
+            [crescendo.uri :refer [uri scheme host port path query fragment]]
+            [speclj.core :refer :all]))
 
 (describe "an HTTP request"
   (with req (request {:protocol {:scheme "http"}

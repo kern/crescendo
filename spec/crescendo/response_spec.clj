@@ -1,3 +1,3 @@
 (ns crescendo.response-spec
-  (:use speclj.core)
-  (:require [crescendo.response :refer []]))
+  (:require [crescendo.response :refer []]
+            [speclj.core :refer :all]))

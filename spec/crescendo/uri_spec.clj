@@ -1,6 +1,6 @@
 (ns crescendo.uri-spec
-  (:use speclj.core)
-  (:require [crescendo.uri :refer [uri]]))
+  (:require [crescendo.uri :refer [uri]]
+            [speclj.core :refer :all]))
 
 (describe "a URI"
   (it "has a normalized form"

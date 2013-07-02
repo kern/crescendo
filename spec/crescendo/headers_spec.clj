@@ -1,6 +1,6 @@
 (ns crescendo.headers-spec
-  (:use speclj.core)
-  (:require [crescendo.headers :refer [headers]]))
+  (:require [crescendo.headers :refer [headers]]
+            [speclj.core :refer :all]))
 
 (describe "a headers map"
   (with hs (headers {"Host" "google.com",
