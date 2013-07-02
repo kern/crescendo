@@ -1,6 +1,6 @@
-# piano
+# crescendo
 
-A Clojure library designed to ... well, that part is up to you.
+An HTTP abstraction.
 
 ## Usage
 
