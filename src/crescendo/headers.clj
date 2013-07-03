@@ -3,7 +3,7 @@
 
 (defn- normalize-key
   [k]
-  (lower-case (name k)))
+  (keyword (lower-case (name k))))
 
 (defn- normalize-keys
   [m]
