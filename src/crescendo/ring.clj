@@ -16,3 +16,7 @@
             :request-target uri
             :headers headers
             :body body}))
+
+(defn response->ring
+  [{:keys [status-code headers body]}]
+  {:status status-code, :headers headers, :body body})
