@@ -1,17 +1,18 @@
 (ns crescendo.uri-test
   (:require [crescendo.uri :refer [uri scheme scheme-specific-part authority user-info host port path query fragment]]
-            [expectations :refer :all]))
+            [midje.sweet :refer :all]))
 
-(let [uri (uri "http://user@foo.com:80/bar?baz#qux")]
-  (expect "http" (scheme uri))
-  (expect "//user@foo.com:80/bar?baz" (scheme-specific-part uri))
-  (expect "user@foo.com:80" (authority uri))
-  (expect "user" (user-info uri))
-  (expect "foo.com" (host uri))
-  (expect 80 (port uri))
-  (expect "/bar" (path uri))
-  (expect "baz" (query uri))
-  (expect "qux" (fragment uri)))
+(fact "`uri` converts an object to a URI"
+  (uri "http://foo.com") => (java.net.URI/create "http://foo.com")
+  (uri (java.net.URI/create "http://foo.com")) => (uri "http://foo.com"))
 
-(expect (uri "http://facebook.com")
-        (uri (java.net.URI/create "http://facebook.com")))
+(fact "URIs have multiple parts"
+  (let [uri (uri "http://user@foo.com:80/bar?baz#qux")]
+    (scheme uri) => "http"
+    (scheme-specific-part uri) => "//user@foo.com:80/bar?baz"
+    (user-info uri) => "user"
+    (host uri) => "foo.com"
+    (port uri) => 80
+    (path uri) => "/bar"
+    (query uri) => "baz"
+    (fragment uri) => "qux"))

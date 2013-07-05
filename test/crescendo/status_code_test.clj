@@ -1,32 +1,38 @@
 (ns crescendo.status-code-test
   (:require [crescendo.status-code :refer [informational? successful? redirection? client-error? server-error? error?]]
-            [expectations :refer :all]))
+            [midje.sweet :refer :all]))
 
-(expect informational? 100)
-(expect informational? 199)
-(expect (not (informational? 200)))
+(fact "informational status codes are in the 100s"
+  100 => informational?
+  199 => informational?
+  200 =not=> informational?)
 
-(expect successful? 200)
-(expect successful? 299)
-(expect (not (successful? 199)))
-(expect (not (successful? 300)))
+(fact "successful status codes are in the 200s"
+  199 =not=> successful?
+  200 => successful?
+  299 => successful?
+  300 =not=> successful?)
 
-(expect redirection? 300)
-(expect redirection? 399)
-(expect (not (redirection? 299)))
-(expect (not (redirection? 400)))
+(fact "redirection status codes are in the 300s"
+  299 =not=> redirection?
+  300 => redirection?
+  399 => redirection?
+  400 =not=> redirection?)
 
-(expect client-error? 400)
-(expect client-error? 499)
-(expect (not (client-error? 399)))
-(expect (not (client-error? 500)))
+(fact "client error status codes are in the 400s"
+  399 =not=> client-error?
+  400 => client-error?
+  499 => client-error?
+  500 =not=> client-error?)
 
-(expect server-error? 500)
-(expect server-error? 599)
-(expect (not (server-error? 499)))
+(fact "server error status codes are in the 500s"
+  499 =not=> server-error?
+  500 => server-error?
+  599 => server-error?)
 
-(expect error? 400)
-(expect error? 499)
-(expect error? 500)
-(expect error? 599)
-(expect (not (error? 399)))
+(fact "error status codes are in the 400s and 500s"
+  399 =not=> error?
+  400 => error?
+  499 => error?
+  500 => error?
+  599 => error?)

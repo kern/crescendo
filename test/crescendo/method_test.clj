@@ -1,22 +1,25 @@
 (ns crescendo.method-test
   (:require [crescendo.method :refer [method safe? idempotent?]]
-            [expectations :refer :all]))
+            [midje.sweet :refer :all]))
 
-(expect :get (method nil))
-(expect :post (method "post"))
-(expect :post (method :post))
-(expect :post (method "POST"))
+(fact "`method` converts and object to a method"
+  (method :post) => :post
+  (method :POST) => :post
+  (method "post") => :post
+  (method "POST") => :post)
 
-(expect safe? :get)
-(expect safe? :head)
-(expect safe? :options)
-(expect (not (safe? :put)))
-(expect (not (safe? :post)))
-(expect (not (safe? :delete)))
+(fact "GET, HEAD, and OPTIONS are safe"
+  :get => safe?
+  :head => safe?
+  :options => safe?
+  :put =not=> safe?
+  :post =not=> safe?
+  :delete =not=> safe?)
 
-(expect idempotent? :get)
-(expect idempotent? :head)
-(expect idempotent? :options)
-(expect idempotent? :put)
-(expect (not (idempotent? :post)))
-(expect idempotent? :delete)
+(fact "GET, HEAD, OPTIONS, PUT, and DELETE are idempotent"
+  :get => idempotent?
+  :head => idempotent?
+  :options => idempotent?
+  :put => idempotent?
+  :post =not=> idempotent?
+  :delete =not=> idempotent?)

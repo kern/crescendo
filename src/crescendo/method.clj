@@ -7,9 +7,7 @@
 (defn method
   "Normalizes the method."
   [o]
-  (if o
-    (-> o name lower-case keyword)
-    :get))
+  (-> o name lower-case keyword))
 
 (defn safe?
   "Determines if a method is safe."

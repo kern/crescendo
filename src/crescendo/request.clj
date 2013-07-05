@@ -18,7 +18,7 @@
 (defn host-uri
   "Creates a URI out of a request's Host header."
   [request]
-  (uri (str "//" (get-in request [:headers "Host"]))))
+  (uri (str "//" (get-in request [:headers :host]))))
 
 (defn reconstruct-url
   "Reconstructs a request's URL from its request-target, Host header, and
