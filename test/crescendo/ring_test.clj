@@ -1,5 +1,5 @@
 (ns crescendo.ring-test
-  (:require [crescendo.ring :refer [scheme->protocol ring->request response->ring]]
+  (:require [crescendo.ring :refer :all]
             [crescendo.protocol :refer [http-1-1 https-1-1]]
             [crescendo.request :refer [request]]
             [midje.sweet :refer :all]))

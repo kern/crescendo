@@ -1,5 +1,5 @@
 (ns crescendo.method-test
-  (:require [crescendo.method :refer [method safe? idempotent?]]
+  (:require [crescendo.method :refer :all]
             [midje.sweet :refer :all]))
 
 (fact "`method` converts and object to a method"

@@ -1,5 +1,5 @@
 (ns crescendo.request-test
-  (:require [crescendo.request :refer [request host-uri reconstruct-url]]
+  (:require [crescendo.request :refer :all]
             [crescendo.uri :refer [uri scheme host port path query fragment]]
             [midje.sweet :refer :all]))
 

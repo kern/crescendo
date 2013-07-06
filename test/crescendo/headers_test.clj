@@ -1,5 +1,5 @@
 (ns crescendo.headers-test
-  (:require [crescendo.headers :refer [headers]]
+  (:require [crescendo.headers :refer :all]
             [midje.sweet :refer :all]))
 
 (fact "`headers` converts an object to a headers map"

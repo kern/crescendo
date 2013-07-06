@@ -1,5 +1,5 @@
 (ns crescendo.protocol-test
-  (:require [crescendo.protocol :refer [protocol http-1-1 https-1-1]]
+  (:require [crescendo.protocol :refer :all]
             [midje.sweet :refer :all]))
 
 (fact "`protocol` converts an object to a protocol"

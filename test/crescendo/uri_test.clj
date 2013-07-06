@@ -1,5 +1,5 @@
 (ns crescendo.uri-test
-  (:require [crescendo.uri :refer [uri scheme scheme-specific-part authority user-info host port path query fragment]]
+  (:require [crescendo.uri :refer :all]
             [midje.sweet :refer :all]))
 
 (fact "`uri` converts an object to a URI"

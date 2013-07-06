@@ -1,5 +1,5 @@
 (ns crescendo.status-code-test
-  (:require [crescendo.status-code :refer [informational? successful? redirection? client-error? server-error? error?]]
+  (:require [crescendo.status-code :refer :all]
             [midje.sweet :refer :all]))
 
 (fact "informational status codes are in the 100s"
