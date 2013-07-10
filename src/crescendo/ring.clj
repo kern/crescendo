@@ -1,22 +1,20 @@
 (ns crescendo.ring
-  (:require [crescendo.protocol :refer [http-1-1 https-1-1]]
-            [crescendo.request :refer [request]]))
-
-(defn scheme->protocol
-  [scheme]
-  (condp = scheme
-    :http http-1-1
-    :https https-1-1
-    (throw (ex-info (str "Unknown scheme '" scheme "'.") {::scheme scheme}))))
+  (:require [crescendo.request :refer [request]]
+            [crescendo.uri :as uri]))
 
 (defn ring->request
-  [{:keys [scheme request-method uri headers body]}]
-  (request {:protocol (scheme->protocol scheme)
-            :method request-method
-            :request-target uri
-            :headers headers
-            :body body}))
+  [{:keys [server-port server-name remote-addr uri scheme request-method
+           ssl-client-cert headers body]}]
+  (let [server (uri/uri nil nil server-name server-port nil nil nil)
+        client (uri/uri nil nil nil remote-addr nil nil nil)]
+    (request {:connection {:server server
+                           :client client
+                           :client-certificate ssl-client-cert}
+              :method request-method
+              :url uri
+              :headers headers
+              :body body})))
 
 (defn response->ring
-  [{:keys [status-code headers body]}]
-  {:status status-code, :headers headers, :body body})
+  [response]
+  (dissoc response :connection))

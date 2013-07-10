@@ -1,31 +1,34 @@
 (ns crescendo.ring-test
   (:require [crescendo.ring :refer :all]
-            [crescendo.protocol :refer [http-1-1 https-1-1]]
             [crescendo.request :refer [request]]
+            [crescendo.uri :refer [uri]]
             [midje.sweet :refer :all]))
 
-(fact "`scheme->protocol` converts a symbol to a protocol"
-  (scheme->protocol :http) => http-1-1
-  (scheme->protocol :https) => https-1-1
-  (scheme->protocol :foo) => throws)
-
 (fact "ring request maps can be converted to requests"
-  (ring->request {:scheme ..scheme..
-                  :request-method ..method..
+  (ring->request {:server-port ..server-port..
+                  :server-name ..server-name..
+                  :remote-addr ..remote-addr..
                   :uri ..uri..
+                  :scheme ..scheme..
+                  :request-method ..method..
+                  :ssl-client-cert ..certificate..
                   :headers ..headers..
                   :body ..body..}) => ..request..
   (provided
-    (scheme->protocol ..scheme..) => ..protocol..
-    (request {:protocol ..protocol..
+    (uri nil nil ..server-name.. ..server-port.. nil nil nil) => ..server..
+    (uri nil nil nil ..remote-addr.. nil nil nil) => ..client..
+    (request {:connection {:server ..server..
+                           :client ..client..
+                           :client-certificate ..certificate..}
               :method ..method..
-              :request-target ..uri..
+              :url ..uri..
               :headers ..headers..
               :body ..body..}) => ..request..))
 
 (fact "responses can be converted to ring response maps"
-  (response->ring {:status-code ..status-code..
+  (response->ring {:connection ..connection..
+                   :status ..status..
                    :headers ..headers..
-                   :body ..body..}) => {:status ..status-code..
+                   :body ..body..}) => {:status ..status..
                                         :headers ..headers..
                                         :body ..body..})
